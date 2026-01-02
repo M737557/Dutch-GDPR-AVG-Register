@@ -1,4 +1,8 @@
 <?php
+// every record update triggers an set date on column updated_at
+// added home button.
+// added timestamp voor nieuwe records current timestamp
+
 session_start();
 
 // Database configuration
@@ -6,7 +10,7 @@ $db_config = [
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'database' => 'onderwijs',
+    'database' => 'voedselbank_almere_avg',
     'table' => 'avg_register',
     'users_table' => 'system_users',
     'changes_table' => 'system_changes'
@@ -121,7 +125,6 @@ $success = '';
 $result = null;
 $columns = [];
 $edit_row = null;
-$search_query = '';
 $sort_column = '';
 $sort_direction = 'ASC';
 $is_logged_in = false;
@@ -371,7 +374,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 email = '$email', 
                                 full_name = '$full_name', 
                                 role = '$role',
-                                is_active = $is_active
+                                is_active = $is_active,
+                                updated_at = CURRENT_TIMESTAMP
                                 WHERE id = '$user_id'";
                         
                         if ($connection->query($sql)) {
@@ -421,7 +425,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Handle main database operations (only if logged in)
 if ($is_logged_in && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action']) && in_array($_POST['action'], ['add', 'edit', 'delete', 'search'])) {
+    if (isset($_POST['action']) && in_array($_POST['action'], ['add', 'edit', 'delete'])) {
         try {
             $connection = new mysqli(
                 $db_config['host'],
@@ -451,6 +455,16 @@ if ($is_logged_in && $_SERVER['REQUEST_METHOD'] === 'POST') {
                             continue;
                         }
                         
+                        // Skip created_at - it will be set automatically by MySQL's DEFAULT CURRENT_TIMESTAMP
+                        if ($col_name === 'created_at') {
+                            continue;
+                        }
+                        
+                        // Skip updated_at - it will be set automatically by MySQL's DEFAULT CURRENT_TIMESTAMP
+                        if ($col_name === 'updated_at') {
+                            continue;
+                        }
+                        
                         if (isset($_POST[$col_name])) {
                             $value = trim($_POST[$col_name]);
                             if (in_array($col_name, $rot47_columns) && $value !== '') {
@@ -472,6 +486,10 @@ if ($is_logged_in && $_SERVER['REQUEST_METHOD'] === 'POST') {
                         $sql = "INSERT INTO {$db_config['table']} ($columns_str) VALUES ($values_str)";
                         if ($connection->query($sql)) {
                             $record_id = $connection->insert_id;
+                            
+                            // Add current timestamps to new_data for logging
+                            $new_data['created_at'] = date('Y-m-d H:i:s');
+                            $new_data['updated_at'] = date('Y-m-d H:i:s');
                             
                             log_change($connection, $db_config['table'], $record_id, 'INSERT', null, $new_data, $columns_str);
                             
@@ -504,6 +522,16 @@ if ($is_logged_in && $_SERVER['REQUEST_METHOD'] === 'POST') {
                                 continue;
                             }
                             
+                            // Skip created_at - it should not be updated
+                            if ($col_name === 'created_at') {
+                                continue;
+                            }
+                            
+                            // Skip updated_at - it will be updated automatically by MySQL's ON UPDATE CURRENT_TIMESTAMP
+                            if ($col_name === 'updated_at') {
+                                continue;
+                            }
+                            
                             if (isset($_POST[$col_name])) {
                                 $value = trim($_POST[$col_name]);
                                 $log_value = $value;
@@ -517,11 +545,20 @@ if ($is_logged_in && $_SERVER['REQUEST_METHOD'] === 'POST') {
                             }
                         }
                         
+                        // Add updated_at column to be updated (MySQL will handle this automatically)
+                        // We add it to the update query for clarity, but it's actually redundant
+                        $updates[] = "updated_at = CURRENT_TIMESTAMP";
+                        
                         if (!empty($updates)) {
                             $updates_str = implode(', ', $updates);
                             $sql = "UPDATE {$db_config['table']} SET $updates_str WHERE id = '$edit_id'";
                             if ($connection->query($sql)) {
+                                // Add current timestamp to new_data for logging (created_at stays the same)
+                                $new_data['updated_at'] = date('Y-m-d H:i:s');
+                                
                                 $changed_fields = get_changed_fields($old_data, $new_data);
+                                $changed_fields .= ($changed_fields ? ', ' : '') . 'updated_at';
+                                
                                 log_change($connection, $db_config['table'], $edit_id, 'UPDATE', $old_data, $new_data, $changed_fields);
                                 
                                 $success = "Record updated successfully!";
@@ -553,12 +590,6 @@ if ($is_logged_in && $_SERVER['REQUEST_METHOD'] === 'POST') {
                         } else {
                             $error = "Error deleting record: " . $connection->error;
                         }
-                    }
-                    break;
-                    
-                case 'search':
-                    if (isset($_POST['search_query'])) {
-                        $search_query = $_POST['search_query'];
                     }
                     break;
             }
@@ -739,7 +770,7 @@ if ($connection) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monochrome DB Editor</title>
+    <title>AVG REGISTER</title>
     <style>
         * {
             margin: 0;
@@ -775,6 +806,28 @@ if ($connection) {
             font-size: 14px;
             font-weight: bold;
             color: #000;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .home-btn {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #ddd;
+            padding: 4px 12px;
+            cursor: pointer;
+            font-size: 11px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        
+        .home-btn:hover {
+            background-color: #eee;
+            border-color: #000;
         }
         
         .user-info {
@@ -879,25 +932,12 @@ if ($connection) {
             font-size: 11px;
             text-decoration: none;
             display: inline-block;
+            transition: all 0.2s;
         }
         
         .btn:hover {
             background-color: #eee;
-        }
-        
-        .search-form {
-            display: flex;
-            flex-grow: 1;
-            max-width: 300px;
-        }
-        
-        .search-input {
-            flex-grow: 1;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            color: #000;
-            padding: 4px;
-            font-size: 11px;
+            border-color: #000;
         }
         
         .data-container {
@@ -1144,6 +1184,21 @@ if ($connection) {
             font-size: 9px;
         }
         
+        .timestamp-info {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 5px;
+            margin: 5px 0;
+            font-size: 10px;
+            color: #666;
+            text-align: center;
+            border-radius: 3px;
+        }
+        
+        .timestamp-info strong {
+            color: #000;
+        }
+        
         @media (max-width: 768px) {
             .form-grid, .user-form-grid {
                 grid-template-columns: 1fr;
@@ -1153,8 +1208,20 @@ if ($connection) {
                 flex-direction: column;
             }
             
-            .search-form {
-                max-width: 100%;
+            .header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .title {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .user-info {
+                width: 100%;
+                justify-content: space-between;
             }
         }
         
@@ -1192,6 +1259,44 @@ if ($connection) {
             color: #666;
             text-align: center;
         }
+        
+        .home-icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: #000;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E") no-repeat center;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E") no-repeat center;
+            mask-size: contain;
+            -webkit-mask-size: contain;
+        }
+        
+        /* Styling voor created_at en updated_at velden */
+        .creation-time {
+            background-color: #f0f8ff;
+            border: 1px solid #ddd;
+            padding: 5px;
+            margin: 5px 0;
+            font-size: 10px;
+            color: #006;
+            text-align: center;
+            border-radius: 3px;
+        }
+        
+        .creation-time strong {
+            color: #000;
+        }
+        
+        .timestamp-field {
+            background-color: #f9f9f9 !important;
+            font-family: 'Courier New', monospace !important;
+            color: #006 !important;
+        }
+        
+        .timestamp-label {
+            color: #006 !important;
+            font-weight: bold !important;
+        }
     </style>
 </head>
 <body>
@@ -1199,7 +1304,7 @@ if ($connection) {
         <?php if (!$is_logged_in): ?>
             <!-- Login Form -->
             <div class="login-container">
-                <div class="login-title">Monochrome DB Editor - Login</div>
+                <div class="login-title">AVG REGISTER - Login</div>
                 
                 <div class="messages">
                     <?php if ($error): ?>
@@ -1236,7 +1341,13 @@ if ($connection) {
         <?php else: ?>
             <!-- Main Application -->
             <div class="header">
-                <div class="title">Monochrome Database Editor</div>
+                <div class="title">
+                    <a href="?" class="home-btn">
+                        <span class="home-icon"></span>
+                        Home
+                    </a>
+                    <span>- AVG REGISTER -</span>
+                </div>
                 <div class="user-info">
                     <div>
                         <strong><?php echo htmlspecialchars($current_user['full_name']); ?></strong>
@@ -1262,9 +1373,7 @@ if ($connection) {
                 <?php endif; ?>
             </div>
             
-            <div class="encryption-info">
-                ⚠️ Notitie: data is gespeudonimiseerd/encrypt in database | verandering zijn in te zien in review modus
-            </div>
+            
             
             <!-- Changes View -->
             <?php if ($show_changes && !empty($changes)): ?>
@@ -1418,31 +1527,22 @@ if ($connection) {
             
                 <!-- Row Counter -->
                 <div class="row-counter">
-                    Toont ALLE rijen: <?php echo $result ? $result->num_rows : 0; ?> van <?php echo $total_rows; ?> rijen in database
+                     <?php echo $result ? $result->num_rows : 0; ?> van <?php echo $total_rows; ?> rijen in database
                     <?php if (isset($column_names)): ?>
-                        <div style="font-size: 10px; color: #666; margin-top: 3px;">
-                            Kolommen: <?php echo count($column_names); ?> kolommen gedetecteerd
-                        </div>
+                        
                     <?php endif; ?>
                 </div>
                 
-                <!-- Sort Info -->
-                <div class="sort-info">
-                    📊 <strong>Standaard sortering:</strong> Eerst op Hoofdcategorie (A-Z), daarna op Subcategorie (A-Z)
-                    <?php if (isset($_GET['sort'])): ?>
-                        <br>📈 <strong>Huidige sortering:</strong> <?php echo htmlspecialchars($_GET['sort']); ?> 
-                        (<?php echo isset($_GET['dir']) && $_GET['dir'] === 'desc' ? 'Z-A' : 'A-Z'; ?>)
-                    <?php endif; ?>
-                </div>
+             
                 
                 <!-- Toolbar -->
                 <div class="toolbar">
-                    <a href="?" class="btn">Refresh (Show All)</a>
+                    <a href="?" class="btn">Refresh</a>
                     
                     <?php if (has_permission('view_changes') || has_permission('view_own_changes')): ?>
                         <form method="POST" style="display: inline;">
                             <input type="hidden" name="action" value="show_changes">
-                            <button type="submit" class="btn">Review modus bekijken</button>
+                            <button type="submit" class="btn">Review modus</button>
                         </form>
                     <?php endif; ?>
                     
@@ -1457,23 +1557,250 @@ if ($connection) {
                         <a href="?add=1" class="btn">Add New Record</a>
                     <?php endif; ?>
                     
-                    <?php if (has_permission('view')): ?>
-                        <form method="POST" class="search-form">
-                            <input type="hidden" name="action" value="search">
-                            <input type="text" name="search_query" class="search-input" placeholder="Search all columns..." value="<?php echo htmlspecialchars($search_query); ?>">
-                            <button type="submit" class="btn">Search</button>
-                            <?php if ($search_query): ?>
-                                <a href="?" class="btn">Clear Search (Show All)</a>
-                            <?php endif; ?>
-                        </form>
-                        
-                        <div class="toggle-view">
-                            <button onclick="toggleCompactView()" class="btn">Toggle Compact View</button>
-                        </div>
-                    <?php endif; ?>
+                    <div class="toggle-view">
+                        <button onclick="toggleCompactView()" class="btn">Toggle Compact View</button>
+                    </div>
                 </div>
                 
-                <!-- Add New User Form (now under toolbar) -->
+                
+                
+                <!-- Add/Edit Record Form -->
+                <?php if ((has_permission('add') && isset($_GET['add'])) || (has_permission('edit') && $edit_row)): ?>
+                    <div class="form-container" id="add-form" style="display: block;">
+                        <div class="form-title">
+                            <?php echo $edit_row ? 'Edit Record' : 'Add New Record'; ?>
+                        </div>
+                        
+                        <div class="creation-time">
+                            📝 <strong>Timestamps:</strong>
+                            <br>• <strong>created_at:</strong> <?php echo $edit_row ? 'Behouden oorspronkelijke datum' : 'Automatisch ingesteld op ' . date('Y-m-d H:i:s'); ?>
+                            <br>• <strong>updated_at:</strong> <?php echo $edit_row ? 'Automatisch bijgewerkt naar ' . date('Y-m-d H:i:s') : 'Automatisch ingesteld op ' . date('Y-m-d H:i:s'); ?>
+                        </div>
+                        
+                        <form method="POST">
+                            <input type="hidden" name="action" value="<?php echo $edit_row ? 'edit' : 'add'; ?>">
+                            <?php if ($edit_row): ?>
+                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($edit_row['id']); ?>">
+                            <?php endif; ?>
+                            
+                            <div class="form-grid">
+                                <?php if ($columns): ?>
+                                    <?php foreach ($columns as $col): ?>
+                                        <?php 
+                                        $col_name = $col['Field'];
+                                        if ($col_name === 'id' || strpos($col['Extra'], 'auto_increment') !== false) {
+                                            continue;
+                                        }
+                                        
+                                        $is_encrypted = in_array($col_name, $rot47_columns);
+                                        $is_timestamp = ($col_name === 'created_at' || $col_name === 'updated_at');
+                                        ?>
+                                        <div class="form-group">
+                                            <label class="form-label <?php if ($is_timestamp): ?>timestamp-label<?php endif; ?>">
+                                                <?php echo htmlspecialchars($col_name); ?> 
+                                                (<?php echo htmlspecialchars($col['Type']); ?>)
+                                                <?php if ($is_encrypted): ?>
+                                                    <span class="encrypted-indicator">versleuteld</span>
+                                                <?php endif; ?>
+                                                <?php if ($is_timestamp): ?>
+                                                    <span style="color: #006; font-weight: bold;">[auto]</span>
+                                                <?php endif; ?>
+                                            </label>
+                                            <?php if ($col_name === 'created_at' || $col_name === 'updated_at'): ?>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-input timestamp-field" 
+                                                    value="<?php 
+                                                        if ($edit_row && $edit_row[$col_name]) {
+                                                            echo htmlspecialchars($edit_row[$col_name]);
+                                                        } else {
+                                                            echo date('Y-m-d H:i:s');
+                                                        }
+                                                    ?>"
+                                                    disabled
+                                                    style="background-color: #f5f5f5;"
+                                                >
+                                                <div style="font-size: 9px; color: #666; margin-top: 2px;">
+                                                    <?php if ($col_name === 'created_at'): ?>
+                                                        Automatisch ingesteld bij aanmaak
+                                                    <?php else: ?>
+                                                        Automatisch bijgewerkt bij wijziging
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php elseif (strpos($col['Type'], 'text') !== false || strpos($col['Type'], 'varchar') !== false && (int)str_replace(['varchar(', ')'], '', $col['Type']) > 100): ?>
+                                                <textarea 
+                                                    name="<?php echo htmlspecialchars($col_name); ?>" 
+                                                    class="form-textarea"
+                                                    <?php if ($is_encrypted): ?>placeholder="Versleutelde inhoud"<?php endif; ?>
+                                                ><?php echo $edit_row ? htmlspecialchars($edit_row[$col_name]) : ''; ?></textarea>
+                                            <?php else: ?>
+                                                <input 
+                                                    type="text" 
+                                                    name="<?php echo htmlspecialchars($col_name); ?>" 
+                                                    class="form-input" 
+                                                    value="<?php echo $edit_row ? htmlspecialchars($edit_row[$col_name]) : ''; ?>"
+                                                    <?php if ($is_encrypted): ?>placeholder="Versleutelde inhoud"<?php endif; ?>
+                                                >
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn"><?php echo $edit_row ? 'Update' : 'Add'; ?> Record</button>
+                                <a href="?" class="btn">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                <?php else: ?>
+                    <div class="form-container" id="add-form" style="display: none;">
+                        <!-- Form will be shown when "Add New Record" is clicked -->
+                    </div>
+                <?php endif; ?>
+                
+               
+                
+                <!-- Data Table -->
+                <?php if (has_permission('view')): ?>
+                    <?php if ($result && $result->num_rows > 0): ?>
+                        <div class="data-container" id="data-container">
+                            <table class="table" id="data-table">
+                                <thead>
+                                    <tr>
+                                        <?php foreach ($columns as $col): ?>
+                                            <?php 
+                                            $col_name = $col['Field'];
+                                            $is_valid_column = true;
+                                            
+                                            $sort_url = "?";
+                                            if ($is_valid_column) {
+                                                $sort_url = "?sort=" . urlencode($col_name) . "&dir=";
+                                                $sort_url .= ($sort_column === $col_name && $sort_direction === 'ASC') ? 'desc' : 'asc';
+                                            }
+                                            $is_encrypted = in_array($col_name, $rot47_columns);
+                                            $is_timestamp = ($col_name === 'created_at' || $col_name === 'updated_at');
+                                            ?>
+                                            <th>
+                                                <?php if ($is_valid_column): ?>
+                                                    <a href="<?php echo $sort_url; ?>" style="color: #000; text-decoration: none;">
+                                                        <?php echo htmlspecialchars($col_name); ?>
+                                                        <?php if ($is_timestamp): ?>
+                                                            <span style="color: #006; font-weight: bold;">[auto]</span>
+                                                        <?php endif; ?>
+                                                        <?php if ($is_encrypted): ?>
+                                                            <span class="encrypted-badge">[E]</span>
+                                                        <?php endif; ?>
+                                                        <?php if ($sort_column === $col_name): ?>
+                                                            <?php echo $sort_direction === 'ASC' ? '↑' : '↓'; ?>
+                                                        <?php endif; ?>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <?php echo htmlspecialchars($col_name); ?>
+                                                    <?php if ($is_timestamp): ?>
+                                                        <span style="color: #006; font-weight: bold;">[auto]</span>
+                                                    <?php endif; ?>
+                                                    <?php if ($is_encrypted): ?>
+                                                        <span class="encrypted-badge">[E]</span>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            </th>
+                                        <?php endforeach; ?>
+                                        <?php if (has_permission('edit') || has_permission('delete')): ?>
+                                            <th>Actions</th>
+                                        <?php endif; ?>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                    $row_counter = 0;
+                                    while ($row = $result->fetch_assoc()): 
+                                        $row_counter++;
+                                    ?>
+                                        <tr>
+                                            <?php foreach ($columns as $col): ?>
+                                                <?php 
+                                                $col_name = $col['Field'];
+                                                $value = $row[$col_name];
+                                                $is_encrypted = in_array($col_name, $rot47_columns);
+                                                if ($is_encrypted && $value !== null) {
+                                                    $value = rot47_decrypt($value);
+                                                }
+                                                
+                                                $is_timestamp = ($col_name === 'created_at' || $col_name === 'updated_at');
+                                                $is_created_at = ($col_name === 'created_at');
+                                                $is_updated_at = ($col_name === 'updated_at');
+                                                ?>
+                                                <td title="<?php echo htmlspecialchars($value); ?>" 
+                                                    <?php if ($is_timestamp): ?>class="timestamp-field"<?php endif; ?>
+                                                    <?php if ($is_timestamp): ?>style="background-color: #f9f9f9; font-family: 'Courier New', monospace; color: #006;"<?php endif; ?>>
+                                                    <?php 
+                                                    if (strlen($value) > 50 && !$is_timestamp) {
+                                                        echo htmlspecialchars(substr($value, 0, 47)) . '...';
+                                                    } else {
+                                                        echo htmlspecialchars($value);
+                                                    }
+                                                    ?>
+                                                    <?php if ($is_encrypted && $value !== ''): ?>
+                                                        <span class="encrypted-check">✓</span>
+                                                    <?php endif; ?>
+                                                    <?php if ($is_created_at): ?>
+                                                        <div style="font-size: 8px; color: #666; margin-top: 2px;">
+                                                            Aangemaakt
+                                                        </div>
+                                                    <?php elseif ($is_updated_at): ?>
+                                                        <div style="font-size: 8px; color: #666; margin-top: 2px;">
+                                                            Laatste wijziging
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </td>
+                                            <?php endforeach; ?>
+                                            <?php if (has_permission('edit') || has_permission('delete')): ?>
+                                                <td class="actions">
+                                                    <?php if (has_permission('edit')): ?>
+                                                        <a href="?edit=<?php echo htmlspecialchars($row['id']); ?>" class="btn">Edit</a>
+                                                    <?php endif; ?>
+                                                    <?php if (has_permission('delete')): ?>
+                                                        <form method="POST" style="display: inline;">
+                                                            <input type="hidden" name="action" value="delete">
+                                                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['id']); ?>">
+                                                            <button type="submit" class="btn" onclick="return confirm('Delete this record?')">Delete</button>
+                                                        </form>
+                                                    <?php endif; ?>
+                                                </td>
+                                            <?php endif; ?>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="status-bar">
+                            <div>Showing ALL <?php echo $row_counter; ?> records (Total in DB: <?php echo $total_rows; ?>)</div>
+                            <div>Encrypted columns: <?php echo count($rot47_columns); ?> of <?php echo count($columns); ?></div>
+                            <div>User: <?php echo htmlspecialchars($current_user['username']); ?> (<?php echo htmlspecialchars($current_user['role']); ?>)</div>
+                        </div>
+                        
+                    <?php elseif ($result && $result->num_rows === 0): ?>
+                        <div class="error" style="text-align: center;">
+                            No records found in the table. Database appears to be empty.
+                        </div>
+                    <?php elseif ($error): ?>
+                        <div class="error" style="text-align: center;">
+                            Cannot display data due to connection error: <?php echo htmlspecialchars($error); ?>
+                        </div>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <div class="error" style="text-align: center;">
+                        You don't have permission to view data.
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+	
+	
+	<!-- Add New User Form (now under toolbar) -->
                 <?php if ($show_user_form && has_permission('manage_users')): ?>
                     <div class="form-container user-management-section" id="add-user-form">
                         <div class="form-title">
@@ -1521,71 +1848,14 @@ if ($connection) {
                         </form>
                     </div>
                 <?php endif; ?>
-                
-                <!-- Add/Edit Record Form -->
-                <?php if ((has_permission('add') && isset($_GET['add'])) || (has_permission('edit') && $edit_row)): ?>
-                    <div class="form-container" id="add-form" style="display: block;">
-                        <div class="form-title">
-                            <?php echo $edit_row ? 'Edit Record' : 'Add New Record'; ?>
-                        </div>
-                        <form method="POST">
-                            <input type="hidden" name="action" value="<?php echo $edit_row ? 'edit' : 'add'; ?>">
-                            <?php if ($edit_row): ?>
-                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($edit_row['id']); ?>">
-                            <?php endif; ?>
-                            
-                            <div class="form-grid">
-                                <?php if ($columns): ?>
-                                    <?php foreach ($columns as $col): ?>
-                                        <?php 
-                                        $col_name = $col['Field'];
-                                        if ($col_name === 'id' || strpos($col['Extra'], 'auto_increment') !== false) {
-                                            continue;
-                                        }
-                                        
-                                        $is_encrypted = in_array($col_name, $rot47_columns);
-                                        ?>
-                                        <div class="form-group">
-                                            <label class="form-label">
-                                                <?php echo htmlspecialchars($col_name); ?> 
-                                                (<?php echo htmlspecialchars($col['Type']); ?>)
-                                                <?php if ($is_encrypted): ?>
-                                                    <span class="encrypted-indicator">versleuteld</span>
-                                                <?php endif; ?>
-                                            </label>
-                                            <?php if (strpos($col['Type'], 'text') !== false || strpos($col['Type'], 'varchar') !== false && (int)str_replace(['varchar(', ')'], '', $col['Type']) > 100): ?>
-                                                <textarea 
-                                                    name="<?php echo htmlspecialchars($col_name); ?>" 
-                                                    class="form-textarea"
-                                                    <?php if ($is_encrypted): ?>placeholder="Versleutelde inhoud"<?php endif; ?>
-                                                ><?php echo $edit_row ? htmlspecialchars($edit_row[$col_name]) : ''; ?></textarea>
-                                            <?php else: ?>
-                                                <input 
-                                                    type="text" 
-                                                    name="<?php echo htmlspecialchars($col_name); ?>" 
-                                                    class="form-input" 
-                                                    value="<?php echo $edit_row ? htmlspecialchars($edit_row[$col_name]) : ''; ?>"
-                                                    <?php if ($is_encrypted): ?>placeholder="Versleutelde inhoud"<?php endif; ?>
-                                                >
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </div>
-                            
-                            <div class="form-actions">
-                                <button type="submit" class="btn"><?php echo $edit_row ? 'Update' : 'Add'; ?> Record</button>
-                                <a href="?" class="btn">Cancel</a>
-                            </div>
-                        </form>
-                    </div>
-                <?php else: ?>
-                    <div class="form-container" id="add-form" style="display: none;">
-                        <!-- Form will be shown when "Add New Record" is clicked -->
-                    </div>
-                <?php endif; ?>
-                
-                <!-- Users List Table (if users exist and user has permission) -->
+				
+				
+				
+				
+				
+				
+				
+				 <!-- Users List Table (if users exist and user has permission) -->
                 <?php if (has_permission('manage_users') && !empty($users_list)): ?>
                     <div class="form-container users-management">
                         <div class="form-title">User Management - Existing Users</div>
@@ -1601,6 +1871,7 @@ if ($connection) {
                                         <th>Role</th>
                                         <th>Active</th>
                                         <th>Last Login</th>
+                                        <th>Updated At</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -1616,6 +1887,7 @@ if ($connection) {
                                             </span></td>
                                             <td><?php echo $user['is_active'] ? 'Yes' : 'No'; ?></td>
                                             <td><?php echo htmlspecialchars($user['last_login']); ?></td>
+                                            <td><?php echo htmlspecialchars($user['updated_at']); ?></td>
                                             <td class="actions">
                                                 <button onclick="editUser(<?php echo htmlspecialchars(json_encode($user)); ?>)" class="btn">Edit</button>
                                                 <form method="POST" style="display: inline;">
@@ -1631,122 +1903,6 @@ if ($connection) {
                         </div>
                     </div>
                 <?php endif; ?>
-                
-                <!-- Data Table -->
-                <?php if (has_permission('view')): ?>
-                    <?php if ($result && $result->num_rows > 0): ?>
-                        <div class="data-container" id="data-container">
-                            <table class="table" id="data-table">
-                                <thead>
-                                    <tr>
-                                        <?php foreach ($columns as $col): ?>
-                                            <?php 
-                                            $col_name = $col['Field'];
-                                            $is_valid_column = true;
-                                            
-                                            $sort_url = "?";
-                                            if ($is_valid_column) {
-                                                $sort_url = "?sort=" . urlencode($col_name) . "&dir=";
-                                                $sort_url .= ($sort_column === $col_name && $sort_direction === 'ASC') ? 'desc' : 'asc';
-                                            }
-                                            $is_encrypted = in_array($col_name, $rot47_columns);
-                                            ?>
-                                            <th>
-                                                <?php if ($is_valid_column): ?>
-                                                    <a href="<?php echo $sort_url; ?>" style="color: #000; text-decoration: none;">
-                                                        <?php echo htmlspecialchars($col_name); ?>
-                                                        <?php if ($is_encrypted): ?>
-                                                            <span class="encrypted-badge">[E]</span>
-                                                        <?php endif; ?>
-                                                        <?php if ($sort_column === $col_name): ?>
-                                                            <?php echo $sort_direction === 'ASC' ? '↑' : '↓'; ?>
-                                                        <?php endif; ?>
-                                                    </a>
-                                                <?php else: ?>
-                                                    <?php echo htmlspecialchars($col_name); ?>
-                                                    <?php if ($is_encrypted): ?>
-                                                        <span class="encrypted-badge">[E]</span>
-                                                    <?php endif; ?>
-                                                <?php endif; ?>
-                                            </th>
-                                        <?php endforeach; ?>
-                                        <?php if (has_permission('edit') || has_permission('delete')): ?>
-                                            <th>Actions</th>
-                                        <?php endif; ?>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php 
-                                    $row_counter = 0;
-                                    while ($row = $result->fetch_assoc()): 
-                                        $row_counter++;
-                                    ?>
-                                        <tr>
-                                            <?php foreach ($columns as $col): ?>
-                                                <?php 
-                                                $col_name = $col['Field'];
-                                                $value = $row[$col_name];
-                                                $is_encrypted = in_array($col_name, $rot47_columns);
-                                                if ($is_encrypted && $value !== null) {
-                                                    $value = rot47_decrypt($value);
-                                                }
-                                                ?>
-                                                <td title="<?php echo htmlspecialchars($value); ?>">
-                                                    <?php 
-                                                    if (strlen($value) > 50) {
-                                                        echo htmlspecialchars(substr($value, 0, 47)) . '...';
-                                                    } else {
-                                                        echo htmlspecialchars($value);
-                                                    }
-                                                    ?>
-                                                    <?php if ($is_encrypted && $value !== ''): ?>
-                                                        <span class="encrypted-check">✓</span>
-                                                    <?php endif; ?>
-                                                </td>
-                                            <?php endforeach; ?>
-                                            <?php if (has_permission('edit') || has_permission('delete')): ?>
-                                                <td class="actions">
-                                                    <?php if (has_permission('edit')): ?>
-                                                        <a href="?edit=<?php echo htmlspecialchars($row['id']); ?>" class="btn">Edit</a>
-                                                    <?php endif; ?>
-                                                    <?php if (has_permission('delete')): ?>
-                                                        <form method="POST" style="display: inline;">
-                                                            <input type="hidden" name="action" value="delete">
-                                                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['id']); ?>">
-                                                            <button type="submit" class="btn" onclick="return confirm('Delete this record?')">Delete</button>
-                                                        </form>
-                                                    <?php endif; ?>
-                                                </td>
-                                            <?php endif; ?>
-                                        </tr>
-                                    <?php endwhile; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <div class="status-bar">
-                            <div>Showing ALL <?php echo $row_counter; ?> records (Total in DB: <?php echo $total_rows; ?>)</div>
-                            <div>Encrypted columns: <?php echo count($rot47_columns); ?> of <?php echo count($columns); ?></div>
-                            <div>User: <?php echo htmlspecialchars($current_user['username']); ?> (<?php echo htmlspecialchars($current_user['role']); ?>)</div>
-                        </div>
-                        
-                    <?php elseif ($result && $result->num_rows === 0): ?>
-                        <div class="error" style="text-align: center;">
-                            No records found in the table. Database appears to be empty.
-                        </div>
-                    <?php elseif ($error): ?>
-                        <div class="error" style="text-align: center;">
-                            Cannot display data due to connection error: <?php echo htmlspecialchars($error); ?>
-                        </div>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <div class="error" style="text-align: center;">
-                        You don't have permission to view data.
-                    </div>
-                <?php endif; ?>
-            <?php endif; ?>
-        <?php endif; ?>
-    </div>
     
     <script>
         function toggleCompactView() {
@@ -1833,6 +1989,12 @@ if ($connection) {
                         <input type="checkbox" name="is_active" ${user.is_active ? 'checked' : ''}>
                         Active
                     </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Updated At</label>
+                    <input type="text" value="${user.updated_at || ''}" class="form-input" disabled style="background-color: #f5f5f5;">
+                    <div style="font-size: 9px; color: #666; margin-top: 2px;">Automatisch bijgewerkt bij wijziging</div>
                 </div>
                 
                 <div class="form-actions">
