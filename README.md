@@ -43,7 +43,7 @@ leesbaar.php
 viewer.php
 //AVG register viewer
 
-De volgende databasetabel (avg_register) kolommen zijn gespeudonimseerd opgeslagen in de database en zijn zelf in te vullen op basis van contracten of intern personeel.
+De volgende databasetabel (avg_register) kolommen zijn gespeudonimseerd opgeslagen(avg proof zie hiervoor de php code) in de database en zijn zelf in te vullen op basis van contracten of intern personeel.
 naam_verwerkingsverantwoordelijke
 contact_verwerkingsverantwoordelijke
 naam_gezamenlijke_verwerkingsverantwoordelijke
