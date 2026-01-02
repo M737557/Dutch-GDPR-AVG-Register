@@ -8,7 +8,7 @@ In het voorbeeld een onderwijs avg register als basis.
 Wil je zelf een ai avg register opstellen? Ga dan aan de slag met de import.sql met deepseek.com
 Laat de import.sql in deepseek.com en geef daarna de volgende opdracht:
 
-'maak een avg register voor de Toerisme sector in een mega dump in deze structuur', zonder de quotes.
+'maak een avg register voor de Toerisme sector in een mega dump in deze structuur', zonder de quotes. Toerisme sector is even het voorbeeld.
 Daarna maakt het een 100 activiteiten avg register, voldoende om mee aan de slag te gaan als basis.
 Gebruik de andere tools om data te bekijken of bewaartermijn om te kijken hoe oud de data is, de opzet was om met data retentie verder te gaan door alleen de mysql kolommen created_at en updatet_at in de gaten te houden. Om meer linair andere tools te ontwikkelen op basis van 2 jaar of andere retentie beleid.
 
