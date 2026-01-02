@@ -12,11 +12,8 @@ Laat de import.sql in deepseek.com en geef daarna de volgende opdracht:
 Daarna maakt het een 100 activiteiten avg register, voldoende om mee aan de slag te gaan als basis.
 Gebruik de andere tools om data te bekijken of bewaartermijn om te kijken hoe oud de data is, de opzet was om met data retentie verder te gaan door alleen de mysql kolommen created_at en updatet_at in de gaten te houden. Om meer linair andere tools te ontwikkelen op basis van 2 jaar of andere retentie beleid.
 
-Bij vragen ben ik beschikbaar op:
+Bij vragen ben ik beschikbaar op mijn PayPal account, Buy me coffee:
 matijn@gmail.com
-
-Buy me coffee:
-paypal account: matijn@gmail.com
 
 MIT license is in het kort: mag niet worden verkocht als software wel gratis te gebruiken en te herschrijven.
 
