@@ -56,6 +56,8 @@ contact_fg
 
 Veel succes, bij vragen kan het even duren voor ik reageer. Komen er nieuwe functie verzoeken toe kijk ik of ik deze toevoeg. Daarvoor ben ik bereikbaar om het simpel te houden wil ik ook meer uitleg geven, stuur een berichtje en vergeet mij geen koffie te doneren ;-)
 
+Engelse vertaling of andere vertalingen zijn op verzoek aan te vragen per e-mail.
+
 
 
 
