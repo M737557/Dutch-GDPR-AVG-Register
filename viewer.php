@@ -10,7 +10,7 @@ $db_config = [
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'database' => 'voedselbank_almere_avg',
+    'database' => '',
     'table' => 'avg_register',
     'users_table' => 'system_users',
     'changes_table' => 'system_changes'
@@ -2047,3 +2047,4 @@ if ($connection) {
     </script>
 </body>
 </html>
+
