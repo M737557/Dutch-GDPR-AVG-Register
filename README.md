@@ -12,8 +12,7 @@ Laad de import.sql in deepseek.com en geef daarna de volgende opdracht:
 Daarna maakt het een 100 activiteiten avg register, voldoende om mee aan de slag te gaan als basis.
 Gebruik de andere tools om de datase eerst te bewerken (1),(2),(2),(3). direct in phpmyadmin SQL van de database. Begin met import.sql Gebruik bewaartermijn.php om te kijken hoe oud de data is, deze is zo opzet dat het in de toekomst omgaat met laatste twee database kolommen - voor data retentie tools( created_at en updatet_at) in de gaten te houden. Om meer lineair andere tools te ontwikkelen op basis van 2 jaar of andere retentie beleid...
 
-Bij vragen ben ik beschikbaar op mijn PayPal account, Buy me coffee:
-matijn@gmail.com
+Bij vragen ben ik beschikbaar:
 
 MIT license is in het kort: mag niet worden doorverkocht als software wel gratis te gebruiken en te herschrijven.
 
@@ -67,7 +66,9 @@ Matijn
 Releases
 first release v.01
 
+second release v.02
 Updates/nieuwe functies:
+viewer versie 12
 
 
 
