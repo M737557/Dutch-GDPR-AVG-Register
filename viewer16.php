@@ -8,7 +8,7 @@
 // added print-friendly feature
 // removed sensitive columns from print (encrypted columns are not shown in print)
 // added batch printing of all records with DPIA
-//v13 viewer
+//v15 viewer
 
 session_start();
 
@@ -20,7 +20,7 @@ $db_config = [
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'database' => 'voedselbank_almere_avg',
+    'database' => 'database_name',
     'table' => 'avg_register',
     'users_table' => 'system_users',
     'changes_table' => 'system_changes',
