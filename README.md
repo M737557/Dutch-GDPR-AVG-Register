@@ -71,7 +71,10 @@ Third release v.03
 Updates/nieuwe functies:
 viewer versie 15
 
-
+4th release v.04 2026-01-16
+Updates/nieuwe functies:
+basic
+basic_viewer-exporthtml.php
 
 
 
