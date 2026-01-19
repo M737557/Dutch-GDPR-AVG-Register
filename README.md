@@ -86,10 +86,15 @@ viewer17.php
 6th release v.06 2026-01-19 15:42 (CET)
 Updates/nieuwe functies:
 viewer18.php 
+
 fixed error (is_active)
+
 dpa_vereist (compact print) was not displaying correct.
+
 added rot47 custom Pseudonymization in code. function rot
+
 rot47_encrypt, rot47_decrypt are now custom build for you, rotate the ciphers..
+
 
 
 
