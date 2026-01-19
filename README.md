@@ -96,6 +96,10 @@ added rot47 custom Pseudonymization in code. function rot
 rot47_encrypt, rot47_decrypt are now custom build for you, rotate the ciphers..
 
 
+New Goodies are:
+all_organizational -dedup.php
+all_technicals -dedup.php
+
 
 
 
