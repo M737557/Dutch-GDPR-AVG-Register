@@ -1,18 +1,8 @@
 <?php
-// every record update triggers an set date on column updated_at
-// added home button.
-// added timestamp voor nieuwe records current timestamp
-// added vertical view option for easier reading
-// added horizontal view showing only first 4 columns, editing only in vertical view
-// added recommendation system for records not recently updated based on updated_at column
-// added print-friendly feature
-// removed sensitive columns from print (encrypted columns are not shown in print)
-// added batch printing of all records with DPIA
-//v17 
-//removed the footer details, button Print All Records with DPIA Details.
-// re
 
-<?php
+//is_active is removed from db query logon error
+
+
 session_start();
 date_default_timezone_set('Europe/Amsterdam');
 
@@ -20,7 +10,7 @@ $db_config = [
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'database' => 'voedselbank_almere_avg',
+    'database' => 'database_name',
     'table' => 'avg_register',
     'users_table' => 'system_users',
     'changes_table' => 'system_changes',
@@ -824,7 +814,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             create_dpia_table($connection, $db_config['dpia_table']);
             $username = $connection->real_escape_string($_POST['username']);
             $password = $_POST['password'];
-            $sql = "SELECT * FROM {$db_config['users_table']} WHERE username = '$username' AND is_active = TRUE LIMIT 1";
+            $sql = "SELECT * FROM {$db_config['users_table']} WHERE username = '$username'";
             $result = $connection->query($sql);
             if ($result && $result->num_rows > 0) {
                 $user = $result->fetch_assoc();
