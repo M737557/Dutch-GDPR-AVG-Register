@@ -27,7 +27,7 @@ try {
             $stmt->close();
             
             // Generate HTML for PDF
-            $html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>AVG Register Medicijnen Export</title><style>
+            $html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Register Export</title><style>
                 body{font-family:DejaVu Sans,Arial,sans-serif;font-size:12px;margin:20px;}
                 .header{text-align:center;border-bottom:2px solid #000;padding-bottom:20px;margin-bottom:30px;}
                 h1{font-size:22px;margin:0;color:#000;} .subtitle{color:#666;margin-top:5px;}
@@ -42,7 +42,7 @@ try {
                 @media print{.record{page-break-inside:avoid;}}
             </style></head><body>';
             
-            $html.='<div class="header"><h1>AVG REGISTER MEDICIJNEN EXPORT</h1><div class="subtitle">Voedselbank Almere - '.date('d-m-Y H:i:s').'</div>
+            $html.='<div class="header"><h1>Register EXPORT</h1><div class="subtitle">Voedselbank Almere - '.date('d-m-Y H:i:s').'</div>
             <div style="margin-top:10px;font-size:11px;">Aantal records: '.count($export_data).'</div></div>';
             
             foreach($export_data as $r){
@@ -72,7 +72,7 @@ try {
             
             // Output as downloadable HTML file (users can save as PDF via browser print)
             header('Content-Type: text/html');
-            header('Content-Disposition: attachment; filename="AVG_Register_Medicijnen_'.date('Y-m-d').'.html"');
+            header('Content-Disposition: attachment; filename="AVG_Register_'.date('Y-m-d').'.html"');
             echo $html;
             exit;
         }
@@ -162,7 +162,7 @@ try {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AVG Register Medicijnen</title>
+<title>Register</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -248,8 +248,8 @@ input[type="checkbox"]:checked::after{content:'✓';color:white;font-size:12px;p
 <body>
 <div class="container">
 <div class="header">
-<h1><i class="fas fa-pills"></i>AVG Register Medicijnen</h1>
-<p>Beheer verwerkingsactiviteiten medicijnen</p>
+<h1><i class="fas fa-pills"></i>Register</h1>
+<p>Beheer verwerkingsactiviteiten</p>
 </div>
 
 <div class="stats-cards">
@@ -309,7 +309,7 @@ input[type="checkbox"]:checked::after{content:'✓';color:white;font-size:12px;p
 </div>
 <div style="display:flex;gap:12px">
 <button type="button" class="btn btn-export" onclick="exportPDF()">
-<i class="fas fa-file-pdf"></i>Export PDF
+<i class="fas fa-file-pdf"></i>Export HTML
 </button>
 <button type="button" id="deleteBtn" class="btn btn-delete" disabled>
 <i class="fas fa-trash-alt"></i>Verwijder
@@ -369,7 +369,7 @@ input[type="checkbox"]:checked::after{content:'✓';color:white;font-size:12px;p
 </form>
 
 <div class="footer">
-<p>AVG Register Medicijnen Management Systeem</p>
+<p>Register Management Systeem</p>
 <div class="footer-stats">
 <div class="footer-stat"><div class="footer-stat-value"><?php echo$total?></div><div class="footer-stat-label">Records</div></div>
 <div class="footer-stat"><div class="footer-stat-value"><?php echo date('H:i')?></div><div class="footer-stat-label">Tijd</div></div>
@@ -419,7 +419,7 @@ input[type="checkbox"]:checked::after{content:'✓';color:white;font-size:12px;p
 </div>
 <div class="modal-footer">
 <button type="button" class="btn" onclick="closeDetail()"><i class="fas fa-times"></i>Sluiten</button>
-<a href="?export=pdf&ids=<?php echo$record['id']?>" class="btn btn-export" target="_blank"><i class="fas fa-file-pdf"></i>Export PDF</a>
+<a href="?export=pdf&ids=<?php echo$record['id']?>" class="btn btn-export" target="_blank"><i class="fas fa-file-pdf"></i>Export HTML</a>
 </div>
 </div>
 </div>
