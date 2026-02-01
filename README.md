@@ -1,6 +1,6 @@
 
 1. # GDPR-AVG-Register
-ai gdpr Register dpia register in English baed on chat.deepseek.com/en 
+ai gdpr Register dpia register in English based on chat.deepseek.com/en 
 
 
 2. # Clipboard tool example registers (dutch companies, in English or dutch language)
