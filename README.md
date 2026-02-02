@@ -1,6 +1,8 @@
 
 ============= RELEASES +++++++++++++++
+
 release8-c.zip contains working mysql database, release8 db from 2days a go was not working.
+
 fix for mysql error, emtpy processing a. titles, dependency for printing dpias..
 
 1. # GDPR-AVG-Register
