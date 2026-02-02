@@ -1,4 +1,26 @@
 
+============= RELEASES ++++++++++++++++
+
+
+#1 # GDPR-AVG-Register
+Update 01/31/2026:
+
+release 8.zip (new interface)
+
+example list gdpr register dpias release 1.zip (example gdpr/dpia register)
+
+update 02/01/2026
+
+example list gdpr register dpias release 2.zip
+
+update 02/02/2026
+
+release8-c.zip contains working mysql database, release8 db from 2days a go was not working.
+fix for mysql error, emtpy processing a. titles, dependency for printing dpias..
+
+2. # Clipboard tool example registers (download) (of dutch companies, in English and in dutch language)
+  1.0
+
 1. # GDPR-AVG-Register
 ai gdpr Register dpia register in English based on chat.deepseek.com/en and mysql/php
 
@@ -46,25 +68,6 @@ $data_directory
 
 
 
-
-============= RELEASES ++++++++++++++++
-
-
-
-Update 01/31/2026:
-
-release 8.zip (new interface)
-
-example list gdpr register dpias release 1.zip (example gdpr/dpia register)
-
-update 02/01/2026
-
-example list gdpr register dpias release 2.zip
-
-update 02/02/2026
-
-release8-c.zip contains working mysql database, release8 db from 2days a go was not working.
-fix for mysql error, emtpy processing a. titles, dependency for printing dpias..
 
 
 
