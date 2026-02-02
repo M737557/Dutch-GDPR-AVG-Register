@@ -3,16 +3,6 @@
 ai gdpr Register dpia register in English based on chat.deepseek.com/en and mysql/php
 
 
-2. # Clipboard tool example registers (download) (of dutch companies, in English and in dutch language)
-php based tool / clipboard_summary.php
-
-Contains 5653 entries from 97 file(s) / companies.
-
-change:
-
-$data_directory
-
-
 ai generate registers
 
 Generate your self:
@@ -41,7 +31,20 @@ Es gibt ein durchschnittliches Register mit 30 Einheiten durchschnittliches Regi
 Behalten Sie die SQL-Struktur bei. In Deutschland
 
 
+2. # Clipboard tool example registers (download) (of dutch companies, in English and in dutch language)
+php based tool / clipboard_summary.php
 
+Contains 5653 entries from 97 file(s) / companies.
+
+change:
+
+$data_directory
+
+
+
+
+
+============= RELEASES ++++++++++++++++
 
 
 
