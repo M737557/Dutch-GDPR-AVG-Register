@@ -66,7 +66,7 @@ Behalten Sie die SQL-Struktur bei. In Deutschland
 2. # Clipboard tool example registers (download) (of dutch companies, in English and in dutch language)
 php based tool
 - index.php
-- pdgenerator.php
+- pdfgenerator.php
 - dutch /english directory with txt files.
 
 Contains over +++ 5653 entries from 97 file(s) / companies.
