@@ -1,4 +1,4 @@
-update 02/04/2026 clipboard tool is now a clipboard tool ;-)
+update 02/04/2026 clipboard tool is now an clipboard tool ;-)
 Release 2
 
 **English GDPR Register and DPIA**
