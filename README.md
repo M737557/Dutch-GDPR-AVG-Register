@@ -1,4 +1,3 @@
-stop working on this one, there is a new system coming 02/03/2026
 
 **English GDPR Register and DPIA**
 
