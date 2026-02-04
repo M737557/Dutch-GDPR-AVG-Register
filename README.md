@@ -4,13 +4,9 @@ change:
 
 $data_directory
 
-Release 3
-- html
-- pdf generator (nice..)
-
-Release 4
+- Release 5
 - clip.php
-- pdfgenerator.php
+- pdfgenerator_dir.php
  
 
 **English GDPR Register and DPIA**
