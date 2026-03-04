@@ -1,4 +1,6 @@
-update 02/04/2026 clipboard tool is now saving clippys
+update 03/04/2026 
+release 8k gdpr/dpias saving tool
+empty fixed createdb.sql file
 
 change:
 
