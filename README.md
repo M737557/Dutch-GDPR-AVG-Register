@@ -1,7 +1,6 @@
 update 7/5/2026 
 
--clipyavg.20260507.142428.zip
-
+-clipyavg.20260507.143549.zip
 release notes
 
 dump for technical and organizational measurements
