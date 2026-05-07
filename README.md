@@ -1,7 +1,11 @@
 update 7/5/2026 
+
 -clipyavg.20260507.142428.zip
+
 release notes
+
 dump for technical and organizational measurements
+
 
 update 03/04/2026 
 release 8k gdpr/dpias saving tool
