@@ -2,6 +2,7 @@ update 7/5/2026
 
 -clipyavg.20260507.143549.zip
 release notes
+- in deze release meerdere Nederlandse transportbedrijven toegevoegd.
 
 dump for technical and organizational measurements
 
