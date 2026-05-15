@@ -1,6 +1,6 @@
 update 7/5/2026 
 
--clipyavg.20260508.095701.zip
+-clipyavg.20260515.085515.zip
 release notes
 - in deze release meerdere Nederlandse transportbedrijven toegevoegd.
 
