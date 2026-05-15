@@ -1,4 +1,4 @@
-update 7/5/2026 
+update 15/5/2026 
 
 -clipyavg.20260515.085515.zip
 release notes
