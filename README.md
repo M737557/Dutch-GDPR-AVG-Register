@@ -1,3 +1,6 @@
+8k = AVG REGISTER TOOL
+clipyavg = sample txt database in webinterface for snippets gdpr/avg/dpias
+
 update 15/5/2026 
 
 -clipyavg.20260515.085515.zip
