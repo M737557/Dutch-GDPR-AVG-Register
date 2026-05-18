@@ -17,34 +17,6 @@ update 03/04/2026
 release 8k gdpr/dpias saving tool
 empty fixed createdb.sql file
 
-change:
-
-$data_directory
-
-- Release 5
-- clip.php
-- pdfgenerator_dir.php
- 
-
-**English GDPR Register and DPIA**
-
-============= RELEASES +++++++++++++++
-
-release8-c.zip contains working mysql database, release8 db from 2days a go was not working.
-
-release8-d updated safeguards minimal of 8 occurrences, technical or organizational measuresments
-
-fix for mysql error, emtpy processing a. titles, dependency for printing dpias..
-
-1. # GDPR-AVG-Register
-ai gdpr Register dpia register in English based on chat.deepseek.com/en and mysql/php
-
-release 8d.zip
-
-2. # Clipboard tool example registers (download) (of dutch companies, in English and in dutch language)
-   
-clipboard-release2.zip
-
 
 
 
