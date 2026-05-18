@@ -1,5 +1,9 @@
 **AVG REGISTER**
+
+release:
+
 8k.zip
+
 
 Requirements:
 - phpmyadmin
