@@ -1,5 +1,9 @@
 8k = AVG REGISTER TOOL
 
+Requirements:
+- phpmyadmin
+- mysql php
+
 clipyavg = sample txt database in webinterface for snippets gdpr/avg/dpias
 
 
