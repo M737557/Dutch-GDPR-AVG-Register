@@ -87,7 +87,6 @@ php based tool
 - pdfgenerator.php
 - dutch /english directory with txt files.
 
-Contains over +++ 5653 entries from 97 file(s) / companies.
 
 change:
 
