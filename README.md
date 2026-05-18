@@ -1,4 +1,5 @@
-8k = AVG REGISTER TOOL
+**AVG REGISTER**
+8k.zip
 
 Requirements:
 - phpmyadmin
@@ -7,22 +8,11 @@ Requirements:
 clipyavg = sample txt database in webinterface for snippets gdpr/avg/dpias
 
 
-
 update 15/5/2026 
 
 -clipyavg.20260517.094707.zip
 release notes
 - start _index.php
-
-dump for technical and organizational measurements
-
-
-update 03/04/2026 
-release 8k gdpr/dpias saving tool
-empty fixed createdb.sql file
-
-
-
 
 
 # GDPR-AVG-Register HOW-TO
@@ -57,17 +47,6 @@ Behalten Sie die SQL-Struktur bei. In Deutschland
 **chat.deepseek.com/en is multilanguage aware, mix languages en keep sql structure.**
 
 
-2. # Clipboard tool example registers (download) (of dutch companies, in English and in dutch language)
-php based tool
-- index.php
-- pdfgenerator.php
-- dutch /english directory with txt files.
-
-
-change:
-
-$data_directory
-to a directory on your computer.
 
 
 
