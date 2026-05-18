@@ -9,13 +9,9 @@ Requirements:
 - phpmyadmin
 - mysql php
 
-clipyavg = sample txt database in webinterface for snippets gdpr/avg/dpias
+**clipyavg**
 
-
-update 15/5/2026 
-
--clipyavg.20260517.094707.zip
-release notes
+sample txt database in webinterface for snippets gdpr/avg/dpias
 - start _index.php
 
 
