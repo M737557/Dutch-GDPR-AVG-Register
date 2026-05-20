@@ -2,7 +2,7 @@
 
 release:
 8n.zip
-note: delete activities and dpias working
+note: delete activities and delete dpias working
 
 Requirements:
 - phpmyadmin
