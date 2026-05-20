@@ -1,7 +1,7 @@
 **AVG REGISTER**
 
 release:
-8m.zip
+8n.zip
 note: delete activities and dpias working
 
 Requirements:
