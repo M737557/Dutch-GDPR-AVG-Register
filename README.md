@@ -1,9 +1,8 @@
 **AVG REGISTER**
 
 release:
-
-8k.zip
-
+8m.zip
+note: delete activities and dpias working
 
 Requirements:
 - phpmyadmin
