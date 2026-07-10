@@ -1,8 +1,9 @@
 **AVG REGISTER**
 
-**** 10 july 2026****
+**** 10 july 2026 11:15 ****
 
 release of BETA 0.1 basis avg in nederlands
+Deze release is nog niet de laatste voor vandaag!
 
 
 **** enjoy this release ****
