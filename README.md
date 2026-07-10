@@ -4,8 +4,13 @@
 
 release of 0.2 version of GDPR basics register with real live example content.
 
+English:
 
 
+basicsGDPRregisterEnglish0.2.sql
+
+Dutch:
+basisavg0.2.sql
 
 **** enjoy this release ****
 
