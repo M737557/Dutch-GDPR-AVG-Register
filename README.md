@@ -2,7 +2,7 @@
 
 **** 10 july 2026****
 
-release of basis avg in nederlands
+release of BETA 0.1 basis avg in nederlands
 
 
 **** enjoy this release ****
