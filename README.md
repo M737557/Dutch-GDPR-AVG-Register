@@ -9,8 +9,11 @@ English:
 
 basicsGDPRregisterEnglish0.2.sql
 
+
 Dutch:
+
 basisavg0.2.sql
+
 
 **** enjoy this release ****
 
