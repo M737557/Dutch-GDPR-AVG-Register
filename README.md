@@ -1,10 +1,10 @@
 **AVG REGISTER**
 
-**** 10 july 2026 11:15 ****
+**** 10 july 2026 13:22 ****
 
 release of 0.2 version of GDPR basics register with real live example content.
 
-Deze release is nog niet de laatste voor vandaag!
+
 
 
 **** enjoy this release ****
