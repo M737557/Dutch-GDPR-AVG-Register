@@ -4,6 +4,9 @@
 
 release of basis avg in nederlands
 
+
+**** enjoy this release ****
+
 release:
 8n.zip
 note: delete activities and delete dpias working
