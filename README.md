@@ -2,7 +2,7 @@
 
 **** 10 july 2026 11:15 ****
 
-release of BETA 0.1 basis avg in het Nederlands
+release of BETA 0.1 basis AVG in het Nederlands
 
 Deze release is nog niet de laatste voor vandaag!
 
