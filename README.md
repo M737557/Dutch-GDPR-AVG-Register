@@ -3,6 +3,7 @@
 **** 10 july 2026 11:15 ****
 
 release of BETA 0.1 basis AVG in het Nederlands
+DPIA's zelf aanvullen.
 
 Deze release is nog niet de laatste voor vandaag!
 
