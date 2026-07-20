@@ -2,7 +2,7 @@
 
 **** 20 july 2026 10:43 ****
 
-release 8m.zip
+release 8m.zip (tool to register GDPR activities).
 
 the print function is now showing all Activity columns.
 
