@@ -1,6 +1,7 @@
 **AVG REGISTER**
 
 **** 20 july 2026 10:43 ****
+
 release 8m.zip
 
 the print function is now showing all Activity columns.
