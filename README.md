@@ -4,7 +4,7 @@
 
 release 8m.zip (tool to register GDPR activities).
 
-the print function is now showing all Activity columns.
+the print function is now showing all Activity columns available.
 
 
 
