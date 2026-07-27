@@ -69,15 +69,4 @@ Es gibt ein durchschnittliches Register mit 30 Einheiten durchschnittliches Regi
 
 Behalten Sie die SQL-Struktur bei. In Deutschland
 
-**chat.deepseek.com/en is multilanguage aware, mix languages en keep sql structure.**
-
-
-
-
-
-Contact:
-
-
-array_strict_0i@icloud.com
-
-
+**chat.deepseek.com/en is multilanguage aware, mix languages and keep sql structure.**
