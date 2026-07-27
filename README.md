@@ -1,7 +1,8 @@
 **AVG REGISTER**
 
-**** 24 july 2026 10:07 ****
-0.3 basisavg0.3.sql
+**** 27 july 2026 10:07 ****
+
+0.4 basisavg0.4.sql
 
 
 release 8m.zip (tool to register GDPR activities).
