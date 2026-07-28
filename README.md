@@ -8,20 +8,4 @@ How to setup:
 
 run .sql file to database in phpmyadmin.
 Then point to 8p.php and edit the content with:
-
 // Database Configuration
-
-$db_config = [
-
-    'host' => 'localhost',
-    
-    'username' => 'root',
-    
-    'password' => 'password',
-    
-    'database' => 'databasename',
-    
-    'charset' => 'utf8mb4'
-    
-];
-
