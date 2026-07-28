@@ -10,7 +10,11 @@ run .sql file to database in phpmyadmin.
 Then point to 8p.php and edit the content with:
 
 // Database Configuration
+
 root
+
 password
+
 databasename
+
 
