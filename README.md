@@ -25,6 +25,7 @@ run .sql file to database in phpmyadmin.
 createdb.sql file
 
 Afterwards run in phpmyadmin:
+
 2:
 
 basisavg0.4.sql file
