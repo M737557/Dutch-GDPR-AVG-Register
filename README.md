@@ -2,6 +2,7 @@
 <br>
 <img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.png">
 PayPal me at: matijn.van.der.schans@gmail.com
+<br>
 Need help or features, contact me.
 <hr>
 
