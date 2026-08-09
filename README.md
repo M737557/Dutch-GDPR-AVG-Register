@@ -1,5 +1,8 @@
 **AVG REGISTER**
 
+Happy with the software? PayPal me at: matijn@gmail.com
+
+
 **** 8 August 2026 13:55 Amsterdam ****
 
 How to setup **sqlite** variant:
