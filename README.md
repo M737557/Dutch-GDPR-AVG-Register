@@ -13,7 +13,7 @@ run .sql file to database in phpmyadmin.
 2:
 edit the content 8m.php:
 <br>
-// setup Database Configuration
+// Setup Database Configuration
 <br>
 root
 <br>
@@ -35,6 +35,5 @@ Installer Windows
 https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.13.1/DB.Browser.for.SQLite-v3.13.1-win64.msi
 <br>
 Double click and download the file 0.4auto.db
-<br>
 <hr>
 
