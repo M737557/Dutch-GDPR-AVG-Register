@@ -1,8 +1,7 @@
 <h1><strong></strong>AVG REGISTER</h1></strong>
 <br>
 PayPal me at: matijn.van.der.schans@gmail.com
-<br>
-<br>
+
 <hr>
 
 <h2>
