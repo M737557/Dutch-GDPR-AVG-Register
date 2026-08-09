@@ -5,8 +5,8 @@ PayPal me at: matijn.van.der.schans@gmail.com
 <br>
 <hr>
 
-**** 8 August 2026 13:55 Amsterdam ****
-How to setup **sqlite** variant:
+<h2>
+How to setup **sqlite** variant:</h2>
 <br>
 
 Installer Windows
@@ -20,7 +20,7 @@ Double click the file 0.4auto.db
 <hr>
 
 
-How to setup **mysql** variant
+<h2>How to setup **mysql** variant</h2>
 
 run .sql file to database in phpmyadmin.
 
