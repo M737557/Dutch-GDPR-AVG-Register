@@ -21,9 +21,7 @@ databasename
 <br>
 Afterwards run in phpmyadmin:
 <br>
-3:
-<br>
-basisavg0.4.sql file
+3: run in phpmyadmin basisavg0.4.sql file
 <br>Then point to 8m.php
 <br>
 <hr>
