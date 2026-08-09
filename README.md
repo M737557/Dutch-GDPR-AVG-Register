@@ -1,7 +1,7 @@
 <h1><strong></strong>AVG/GDPR REGISTER</h1></strong>
 <br>
 <img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.png">
-PayPal me at: matijn.van.der.schans@gmail.com
+Enjoy this software? PayPal me at: matijn.van.der.schans@gmail.com
 <br>
 Need help or features, contact me.
 <hr>
