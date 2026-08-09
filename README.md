@@ -1,6 +1,4 @@
 <h1><strong></strong>AVG/GDPR REGISTER</h1></strong>
-<h3>https://autoriteitpersoonsgegevens.nl/themas/basis-avg/avg-algemeen/grondslagen-avg-uitgelegd)</h3>
-
 <img src="https://i.ibb.co/7NZBQqwx/Naamloos.png">
 <br>
 <img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.png">
@@ -39,4 +37,4 @@ https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.13.1/DB.Brow
 <br>
 Double click and download the file 0.4auto.db
 <hr>
-
+<h3>https://autoriteitpersoonsgegevens.nl/themas/basis-avg/avg-algemeen/grondslagen-avg-uitgelegd)</h3>
