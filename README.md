@@ -1,4 +1,4 @@
-<h1><strong></strong>VG REGISTER</h1></strong>
+<h1><strong></strong>AVG REGISTER</h1></strong>
 <br>
 PayPal me at: matijn.van.der.schans@gmail.com
 <br>
