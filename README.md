@@ -1,7 +1,5 @@
 **AVG REGISTER**
 
-Happy with the software?
-
 PayPal me at: matijn.van.der.schans@gmail.com
 
 
