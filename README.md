@@ -2,6 +2,7 @@
 <br>
 <img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.png">
 PayPal me at: matijn.van.der.schans@gmail.com
+Need help or features, contact me.
 <hr>
 
 <h2>How to setup mysql variant</h2>
