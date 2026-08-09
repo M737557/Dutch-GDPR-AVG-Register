@@ -39,4 +39,4 @@ Double click and download the file 0.4auto.db
 <hr>
 <img width="362" height="80" alt="afbeelding" src="https://github.com/user-attachments/assets/8aad326d-31e2-4ed7-aeb1-e7cd39da0bbf" />
 
-<h3>https://autoriteitpersoonsgegevens.nl/themas/basis-avg/avg-algemeen/grondslagen-avg-uitgelegd)</h3>
+<h3>https://autoriteitpersoonsgegevens.nl/themas/basis-avg/avg-algemeen/grondslagen-avg-uitgelegd</h3>
