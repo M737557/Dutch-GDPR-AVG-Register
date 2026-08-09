@@ -9,7 +9,7 @@ run .sql file to database in phpmyadmin.
 <br>1: run createdb.sql file
 <br>
 2:
-edit the content with:
+edit the content 8m.php:
 <br>
 // setup Database Configuration
 <br>
