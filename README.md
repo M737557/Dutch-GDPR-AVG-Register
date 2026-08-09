@@ -30,7 +30,7 @@ createdb.sql file
 edit the content with:
 <br>
 <br>
-<hr>
+
 // setup Database Configuration
 <br>
 root
