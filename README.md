@@ -1,7 +1,7 @@
 <h1><strong></strong>AVG/GDPR REGISTER</h1></strong>
 <h3>https://autoriteitpersoonsgegevens.nl/themas/basis-avg/avg-algemeen/grondslagen-avg-uitgelegd)</h3>
 
-<img src="https://i.ibb.co/RGpQGkRz/AVG-1.jpg" width="50%" heigth="50%">
+<img src="https://i.ibb.co/7NZBQqwx/Naamloos.png">
 <br>
 <img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.png">
 Enjoy this software? PayPal me at: matijn.van.der.schans@gmail.com
