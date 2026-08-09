@@ -4,7 +4,7 @@ PayPal me at: matijn.van.der.schans@gmail.com
 
 
 <br>
-
+<hr>
 
 **** 8 August 2026 13:55 Amsterdam ****
 How to setup **sqlite** variant:
