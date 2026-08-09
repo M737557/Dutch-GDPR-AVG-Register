@@ -1,4 +1,4 @@
-**AVG REGISTER**
+<h1>**AVG REGISTER**</h1>
 
 PayPal me at: matijn.van.der.schans@gmail.com
 
