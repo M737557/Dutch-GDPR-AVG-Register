@@ -1,7 +1,7 @@
 <h1><strong></strong>AVG/GDPR REGISTER</h1></strong>
-<img src="https://i.ibb.co/RGpQGkRz/AVG-1.jpg">
+<img src="https://i.ibb.co/RGpQGkRz/AVG-1.jpg" width="60%" heigth="60%>
 <br>
-<img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.png width="60%" heigth="60%">
+<img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.png">
 Enjoy this software? PayPal me at: matijn.van.der.schans@gmail.com
 <br>
 Need help or features, contact me.
