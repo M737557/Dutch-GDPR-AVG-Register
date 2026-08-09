@@ -50,7 +50,7 @@ Afterwards run in phpmyadmin:
 basisavg0.4.sql file
 
 
-Then point to 8m.php and 
+Then point to 8m.php
 <br>
 <hr>
 
