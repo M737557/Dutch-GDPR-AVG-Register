@@ -6,7 +6,7 @@ PayPal me at: matijn.van.der.schans@gmail.com
 <hr>
 
 <h2>
-How to setup **sqlite** variant:</h2>
+How to setup sqlite variant:</h2>
 <br>
 
 Installer Windows
@@ -20,7 +20,7 @@ Double click and download the file 0.4auto.db
 <hr>
 
 
-<h2>How to setup **mysql** variant</h2>
+<h2>How to setup mysql variant</h2>
 
 run .sql file to database in phpmyadmin.
 
