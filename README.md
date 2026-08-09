@@ -26,14 +26,8 @@ run .sql file to database in phpmyadmin.
 
 createdb.sql file
 
-Afterwards run in phpmyadmin:
-
 2:
-
-basisavg0.4.sql file
-
-
-Then point to 8m.php and edit the content with:
+edit the content with:
 <br>
 <br>
 <hr>
@@ -44,6 +38,16 @@ root
 password
 <br>
 databasename
+
+
+Afterwards run in phpmyadmin:
+
+3:
+
+basisavg0.4.sql file
+
+
+Then point to 8m.php and 
 <br>
 <hr>
 
