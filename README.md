@@ -39,7 +39,8 @@ password
 <br>
 databasename
 
-
+<br>
+<hr>
 Afterwards run in phpmyadmin:
 
 3:
