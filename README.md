@@ -1,8 +1,7 @@
-<h1>**AVG REGISTER**</h1>
-
+<h1><strong></strong>VG REGISTER</h1></strong>
+<br>
 PayPal me at: matijn.van.der.schans@gmail.com
-
-
+<br>
 <br>
 <hr>
 
@@ -16,9 +15,7 @@ https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.13.1/DB.Brow
 
 Double click the file 0.4auto.db
 
-
-
-
+<hr>
 
 
 How to setup **mysql** variant
@@ -37,13 +34,17 @@ basisavg0.4.sql file
 
 
 Then point to 8m.php and edit the content with:
-
-// Database Configuration
-
+<br>
+<br>
+<hr>
+// setup Database Configuration
+<br>
 root
-
+<br>
 password
-
+<br>
 databasename
+<br>
+<hr>
 
 
