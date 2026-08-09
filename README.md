@@ -1,5 +1,6 @@
 <h1><strong></strong>AVG REGISTER</h1></strong>
 <br>
+<img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.png">
 PayPal me at: matijn.van.der.schans@gmail.com
 
 <hr>
