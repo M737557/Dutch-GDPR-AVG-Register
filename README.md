@@ -2,7 +2,7 @@
 
 Happy with the software?
 
-PayPal me at: matijn@gmail.com
+PayPal me at: matijn.van.der.schans@gmail.com
 
 
 
