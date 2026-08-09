@@ -6,7 +6,7 @@ PayPal me at: matijn.van.der.schans@gmail.com
 
 <h2>How to setup mysql variant</h2>
 run .sql file to database in phpmyadmin.
-1:
+<br>1:
 <br>
 createdb.sql file
 <br>
