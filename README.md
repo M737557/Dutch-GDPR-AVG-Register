@@ -2,6 +2,9 @@
 <img src="https://i.ibb.co/7NZBQqwx/Naamloos.png">
 <br>
 <img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.png">
+<br>
+<img src="https://i.ibb.co/W4WyGs74/IMG-0256.jpg">
+
 Enjoy this software? PayPal me at: matijn.van.der.schans@gmail.com
 <br>
 Need help or features, contact me.
