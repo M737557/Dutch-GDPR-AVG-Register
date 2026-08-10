@@ -7,8 +7,6 @@
 
 Enjoy this software? PayPal me at: matijn.van.der.schans@gmail.com
 <br>
-<img src="https://i.ibb.co/W4WyGs74/IMG-0256.jpg" width="30%" height="30%">
-<br>
 Need help or features, contact me.
 <hr>
 
