@@ -6,7 +6,7 @@
 
 
 Enjoy this software? PayPal me at: matijn.van.der.schans@gmail.com
-<br>Paypal me: <img src="https://paypal.me/matijnvanderschans">
+<br> <a href="https://paypal.me/matijnvanderschans">Paypal me link</a>
 Need help or features, contact me.
 <hr>
 
