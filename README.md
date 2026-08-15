@@ -1,14 +1,10 @@
 <h1><strong></strong>AVG/GDPR REGISTER</h1></strong>
 <img src="https://i.ibb.co/7NZBQqwx/Naamloos.png">
 <br>
-<img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.png">
-<br>
 
 
-Enjoy this software? PayPal me at: matijn.van.der.schans@gmail.com or use <a href="https://paypal.me/matijnvanderschans">Paypal Me Link</a>
-<br>
-Need help or features, contact me.
-<hr>
+
+
 
 <h2>How to setup mysql variant</h2>
 run .sql file to database in phpmyadmin.
